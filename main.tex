@@ -1,0 +1,96 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{preamble}
+\usepackage{listings}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+\renewcommand{\lstlistingname}{Code}% Listing -> Code
+\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Codes
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=3pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=3
+}
+\lstset{style=mystyle}
+
+\def\FS{Formelsammlung}
+\def\Fach{Regelungstechnik}
+\def\FachAkz{RT}
+\title{\FS \ \Fach}
+\author{Bastian Nagler}
+\date{\today}
+\def\Semester{SoSe 26}
+
+\begin{document}
+
+\pagenumbering{gobble}
+\begin{titlepage}
+\thispagestyle{empty}
+
+	\begin{center}
+		\vspace*{\stretch{0.5}}
+		\includegraphics[width=0.5\textwidth]{./Figures/Logo/OTHR_FakEI_Logo.png}\\
+		\vspace*{\stretch{0.25}}
+		\Huge
+		\textsc{\FS}\\
+		\textsc{\Fach \hspace*{1pt} (\FachAkz)}\\
+		\large
+		\vspace*{\stretch{0.5}}
+		{nach Vorlesungsunterlagen von\\ Prof. Dr.-Ing. C. Brüdigam}\\
+		\vspace*{\stretch{0.5}}
+
+\vspace*{\stretch{2}}
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{l l}
+	\href{https://github.com/maxibaxi16/RT_Formelsammlung}{Originalversion:} & \hspace{4cm} Maximilian Binninger\\
+	\href{https://github.com/BastianNagler/RT_Formelsammlung}{Überarbeitet:} & \hspace{4cm} Bastian Nagler\\
+    %Matrikelnummer:  & \hspace{4cm}\MatNr\\
+    Letzter Stand:  & \hspace{4cm} \textsc{\Semester}  \\
+    Lizenz:  & \hspace{4cm} GPLv3
+\end{tabular}
+}
+\vspace*{\stretch{1}}
+
+\end{center}
+\end{titlepage}
+
+
+\newpage
+
+\tableofcontents\clearpage
+
+\pagestyle{fancy}
+%\renewcommand{\sectionmark}[1]{\markboth{#1}}
+\fancyhead[L]{\FachAkz}
+\fancyhead[R]{\nouppercase{\leftmark}}
+%\rhead{\leftmark}
+%\cfoot{\vspace{-20pt}\thepage}
+\pagenumbering{arabic}
+\fancyfoot[c]{\thepage \hspace{1pt} von \pageref{LastPage}}
+% \setlength{\columnsep}{1pt}
+\raggedcolumns
+\begin{multicols*}{2}
+
+	\input{sections/grundlagen.tex}
+	\input{sections/systemtechnik.tex}
+	\input{sections/zusammenwirkenMehrererSysteme.tex}
+	\input{sections/digitaleRegler.tex}
+	\input{sections/systembeschreibungImZustandsraum.tex}
+
+\end{multicols*}
+\end{document}

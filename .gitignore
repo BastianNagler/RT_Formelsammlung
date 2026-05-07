@@ -5,3 +5,10 @@ tags
 *.out
 *.fdb*
 *.fls
+main.synctex.busy
+main.synctex(busy)
+main.synctex.gz
+
+/build
+
+LOOKUP.*
