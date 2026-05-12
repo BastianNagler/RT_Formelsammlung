@@ -1,183 +1,213 @@
 \section{Zusammenwirken mehrerer Systeme}
 \subsection{Regelkreis}
-\begin{mdframed}[style=exercise,frametitle=Anforderungen:]
-	\begin{itemize}[leftmargin=*]
-		\item Stabilität: Regelkreis muss stabiles Verhalten zeigen (gilt
-		      auch für instabile Systeme)
-		\item Gutes Führungsverhalten: Die Differenz zw. Sollwert w(t) und
-		      Istwert x(t) muss schnell klein werden.
-		\item Gutes Störverhalten: Einfluss von Störgrößen soll vermindert
-		      werden.
-	\end{itemize}
-\end{mdframed}
+	\begin{mdframed}[style=exercise, frametitle=Wichtige Begriffe]
+		\begin{itemize}[leftmargin=*]
+			\item Führungsgröße: w(t)
+			\item Störgröße: z(t)
+			\item Regelgröße: x(t)
+			\item Regeldifferenz: e(t) = w(t) - x(t)
+			\item Maximale Überschwingweite: maximale Regelabweichung nach dem erstmaligen Erreichen des Sollwertes
+			\item Anregelzeit: Zeit zum erstmaligen Erreichen des Sollwertes
+			\item Ausregelzeit: Zeit zum dauerhaften Erreichen des Sollwertes im Toleranzband
+		\end{itemize}
+	\end{mdframed}
 
-Grundstruktur des einschleifigen Regelkreises:
+	\begin{mdframed}[style=exercise,frametitle=Anforderungen:]
+		\begin{itemize}[leftmargin=*]
+			\item Stabilität: Regelkreis muss stabiles Verhalten zeigen (gilt
+				auch für instabile Systeme)
+			\item Gutes Führungsverhalten: Die Differenz zw. Sollwert w(t) und
+				Istwert x(t) muss schnell klein werden.
+			\item Gutes Störverhalten: Einfluss von Störgrößen soll vermindert
+				werden.
+		\end{itemize}
+	\end{mdframed}
 
-\includegraphics[width=0.9\columnwidth]{Figures/einschleifiger Regelkreis.png}
+	Grundstruktur des einschleifigen Regelkreises:
 
-\includegraphics[width=0.94\columnwidth]{Figures/Reglerauswahl.png}
+	\includegraphics[width=0.8\columnwidth]{Figures/zusammenwirkenMehrererSysteme/einschleifigerRegelkreis.png}
 
+	\includegraphics[width=\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Reglerauswahl.png}
+
+	Grundsätzliche Eigenschaften der Kreisstruktur: 
+
+	\begin{figure}[H]
+			\includegraphics[width=0.8\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Kreisstruktur.png}
+	\end{figure}
+	\begin{align*}
+		X &= \frac{F_V}{1+F_V \cdot F_r}\cdot W + \frac{1}{1 + F_V \cdot F_r} \cdot Z_1 + \frac{- F_V \cdot F_r}{1 + F_V \cdot F_r} \cdot Z_2 \\
+		F_w &= \frac{F_V}{1+F_V \cdot F_r} \text{ (Führungsübertragungsfunktion)}\\
+		F_{z1} &= \frac{1}{1 + F_V \cdot F_r} \text{ (Störübertragungsfunktion 1)}\\
+		F_{z2} &= \frac{- F_V \cdot F_r}{1 + F_V \cdot F_r} \text{ (Störübertragungsfunktion 2)}
+	\end{align*}
 
 \subsection{Wurzelortskurven (WOK)-Verfahren}
-\begin{mdframed}[style=exercise]
-	Reglerfunktion $F_R$ in Reglerverstärkung und Reglerdynamik aufspalten:
-	$F_R =K \cdot F_R ' $
-\end{mdframed}
+	\begin{mdframed}[style=exercise]
+		Reglerfunktion $F_R$ in Reglerverstärkung und Reglerdynamik aufspalten:
+		$F_R =K \cdot F_R ' $
+	\end{mdframed}
 
-\includegraphics[width=0.94\columnwidth]{Figures/WOKkreis.png}
-\[
-	\Rightarrow F_w (s)= \dfrac {F_R \cdot F_S} {1+F_R \cdot F_S \cdot F_r}
-\]
+	\includegraphics[width=0.94\columnwidth]{Figures/zusammenwirkenMehrererSysteme/WOKkreis.png}
+	\[
+		\Rightarrow F_w (s)= \dfrac {F_R \cdot F_S} {1+F_R \cdot F_S \cdot F_r} = \dfrac {F_R \cdot F_S} {1+F_o}
+	\]
 
-\begin{mdframed}[style=exercise]
-	Dabei ist $F_o = F_R \cdot F_S \cdot F_r$ die Übertragungsfunktion des
-	offenen Regelkreises. $F_o$ kann auch in faktorisierter Form angegeben
-	werden:
-\end{mdframed}
+	\begin{align*}
+		F_o (s) & = F_R (s) \cdot F_S (s) \cdot F_r (s)
+		\\ & =K \cdot F_R '(s) \cdot F_S (s) \cdot F_r (s)
+		\\ & =K \cdot Q \cdot \frac{\prod_{u=1}^{m}\left(s-s_{\text {Nou
+				}}\right)}{\prod_{v=1}^{n}\left(s-s_{\text {pov }}\right)}
+	\end{align*}
 
-\begin{align*}
-	F_w (s) & = F_R (s) \cdot F_S (s) \cdot F_r (s)
-	\\ & =K \cdot F_R '(s) \cdot F_S (s) \cdot F_r (s)
-	\\ & =K \cdot Q \cdot \frac{\prod_{u=1}^{m}\left(s-s_{\text {Nou
-			}}\right)}{\prod_{v=1}^{n}\left(s-s_{\text {pov }}\right)}
-\end{align*}
-
-Für eine Polstele, muss der Nenner von $F_w (s)$ Null werden:
-\[
-	\dfrac{F_R (s) \cdot F_S (s)}{1+F_o (s)} \Rightarrow 1+F_o (s) \stackrel{!}{=}0
-\]
-
-Daraus folgt:
-\begin{align*}
-	 & \Rightarrow 1+ K \cdot Q \cdot \frac{\prod_{M=1}^{m}\left(s-s_{\text {Nou }}\right)}{\prod_{v=1}^{n}\left(s-s_{\text {por }}\right)}         \\
-	 & \Rightarrow \frac{\prod_{v=1}^{n}\left(s-s_{\text {pov }}\right)}{\prod_{u=1}^{m}\left(s-s_{\text {Nou }}\right)} \stackrel{!}{=} -K \cdot Q
-\end{align*}
-
-Entspricht: $\frac{\texttt{Multiplikation aller PS zum gesuchten Punkt}}
-	{\texttt{Multiplikation aller NS zum gesuchten Punkt}}$
+	Für eine Polstele, muss der Nenner von $F_w (s)$ Null werden:
+	\[
+		\dfrac{F_R (s) \cdot F_S (s)}{1+F_o (s)} \Rightarrow 1+F_o (s) \stackrel{!}{=}0
+	\]
 
 \subsection{Konstruktion der WOK}
-\begin{mdframed}[style=exercise]
-	\begin{enumerate}[leftmargin=*]
-		\item Alle n Äste der WOK beginnen mit K=0 in den n Polen $s_pov$ des offenen Regelkreises.
-		\item m Äste der WOK enden für K $\rightarrow \pm \infty$
-		\item n -m Äste der WOK enden für K $\rightarrow \pm \infty$ im Unendlichen
-		\item Die n-m ins Unendliche strebende Äste der WOK haben Asymptoten,die\\
-		      a) im Wurzelschwerpunkt
-		      \[S_{w}=\frac{\sum_{v=1}^{n} s_{pov}-\sum_{u=1}^{m} s_{_{Nop}}}{n-m}\]
-		      beginnen und die dabei\\
-		      b) mit der reellen Achse die Winkel\\
-		      $\varphi_{k}=\frac{(2 k-1) \cdot 180^{\circ}}{n-m}$ für KQ > 0 bzw.\\
-		      mit k = 1,2,3,\dots,n-m
-		\item Die Punkte der WOk liegen entweder auf der reelen Achse, oder symmetrisch zur reelen Achse
-		\item Ein Punkt s auf der reellen Achse ist dann ein Punkt der WOK, wenn sich bei KQ > 0 (KQ<0)
-		      rechts von ihm eine ungerade (gerade) Anzahl von Polen $s_{pov}$ und (+) Nullstellen $s_{Nov}$ befindet.
-	\end{enumerate}
+	\begin{mdframed}[style=exercise]
+		\begin{enumerate}[leftmargin=*]
+			\item Alle n Äste der WOK beginnen mit K=0 in den n Polen $s_{Po_v}$ des offenen Regelkreises.
+			\item m Äste der WOK enden für K $\rightarrow \pm \infty$ in den \(m\) endlichen Nullstellen $s_{No_v}$ des offenen Regelkreises 
+			\item \(n - m\) Äste der WOK enden für K $\rightarrow \pm \infty$ im Unendlichen. \(n - m\) ist der Polüberschuss.
+			\item Die n-m ins Unendliche strebende Äste der WOK haben Asymptoten, die\\
+				a) im Wurzelschwerpunkt
+				\begin{align*}
+					s_{w}=\frac{\sum_{v=1}^{n} s_{pov}-\sum_{u=1}^{m} s_{_{Nop}}}{n-m}
+				\end{align*}
+				beginnen und die dabei\\
+				b) mit der reellen Achse die Winkel
+				\begin{align*}
+					\varphi_{k} &= \frac{(2 k-1) \cdot 180^{\circ}}{n-m} \text{ für } KQ < 0 \\
+					\text{bzw. } \varphi_{k} &= \frac{(2 k-2) \cdot 180^{\circ}}{n-m} \text{ für } KQ < 0 \\
+					\text{mit } k &= 1,2,3,\ldots,n-m
+				\end{align*}
+				einschließen.
+			\item Die Punkte der WOk liegen entweder auf der reelen Achse, oder symmetrisch zur reelen Achse
+			\item Ein Punkt s auf der reellen Achse ist dann ein Punkt der WOK, wenn sich bei KQ > 0 (KQ<0)
+				rechts von ihm eine ungerade (gerade) Anzahl von Polen $s_{Po_v}$ und (+) Nullstellen $s_{No_v}$ befindet.
+		\end{enumerate}
 
-	Achtung: WOK ist nicht anwendbar, wenn es sich um nicht rationale
-	Übertragungsfunktionen handelt.\\ (z.B. Regelkreis mit Totzeitverhalten!)
-\end{mdframed}
+		Achtung: WOK ist nicht anwendbar, wenn es sich um nicht rationale
+		Übertragungsfunktionen handelt.\\ (z.B. Regelkreis mit Totzeitverhalten!)
+	\end{mdframed}
 
 \subsection{Nyquist Kriterium}
-\begin{center}
-	\includegraphics[width=.45\textwidth]{Figures/Nyquist.png}
-\end{center}
-Frequenzgangfunktion des offenen Regelkreises:
-\[
-	F_o (j\omega) = F_r (j\omega) \cdot F_R (j\omega) \cdot F_S (j\omega)
-\]
+	\begin{center}
+		\includegraphics[width=.45\textwidth]{Figures/zusammenwirkenMehrererSysteme/Nyquist.png}
+	\end{center}
+	Frequenzgangfunktion des offenen Regelkreises:
+	\begin{align*}
+		F_o (j\omega) = F_r (j\omega) \cdot F_R (j\omega) \cdot F_S (j\omega)
+	\end{align*}
 
-Ausgangssignal:
-\begin{align*}
-	x_a(t) & =-F_r (j\omega) \cdot F_R (j\omega) \cdot F_S (j\omega) \cdot
-	x_{e0}sin(\omega t)                                                    \\
-	       & = -F_0 (j\omega) \cdot x_e (t)
-\end{align*}
+	Ausgangssignal:
+	\begin{align*}
+		x_a(t) &= -F_o (j\omega) \cdot x_e (t)
+	\end{align*}
 
-Regler und seine Parameter werden so gewählt,\\ dass $\omega = \omega_{krit}$ gilt:
-\[
-	-F_0 (j\omega_{krit})=1 \text{ oder } F_0 (j\omega_{krit})=-1 \texttt{ (Schwingbedingung)}
-\]
+	Regler und seine Parameter werden so gewählt,\\ dass $\omega = \omega_{krit}$ gilt:
+	\begin{align*}
+		F_o (j\omega_{krit})=-1 \texttt{ (Schwingbedingung)}
+	\end{align*}
 
-\begin{mdframed}[style=exercise]
-	Die Schwingbedingung ist erfüllt, wenn die Ortskurve von $F_1 (j\omega)$
-	durch den kritischen Punkt ($P_{krit} = -2+j0$) der komplexen $F_0$-Ebene
-	geht.
+	\begin{mdframed}[style=exercise]
+		Die Schwingbedingung ist erfüllt, wenn die Ortskurve von $F_o (j\omega)$
+		durch den kritischen Punkt ($P_{krit} = -1+j0$) der komplexen $F_o$-Ebene
+		geht.
 
-	An diesem Punkt kann man $\omega_{krit}$ ablesen (damit kann der Regelkreis
-	Dauerschwingungen ausführen).
+		An diesem Punkt kann man $\omega_{krit}$ ablesen (damit kann der Regelkreis
+		Dauerschwingungen ausführen).
 
-	Für größere $\omega$ ist das System instabil, für kleinere stabil.
-\end{mdframed}
+		Für größere Verstärkung ist das System instabil, für kleinere stabil.
+	\end{mdframed}
 
-\includegraphics[width=0.94\columnwidth]{Figures/Nyquistwkrit.png}
+	\includegraphics[width=0.94\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Nyquistwkrit.png}
 
-\begin{mdframed}[style=exercise]
-	Falls F(s) des offenen Kreises keine Pole in der rechten Halbebene hat und
-	nur max. 2 im Ursprung der s-Ebene, ist der Regelkreis stabil, wenn der
-	kritische Punkt von $\omega$ immer links von s = -1 + 0j liegt.
+	\begin{mdframed}[style=exercise, frametitle=vereinfachtes Nyquist-Kriterium:]
+		Falls F(s) des offenen Kreises keine Pole in der rechten Halbebene hat und
+		nur max. 2 im Ursprung der s-Ebene, ist der Regelkreis stabil, wenn: \\
+		Beim Durchlaufen der Ortskurve von $F_o (j\omega)$ für $\omega$ von 0 bis $\infty$ der
+		kritische Punkt \(F_o(j \omega_{krit} = -1 + 0j)\) auf der linken Seite der Ortskurve liegt.
+	\end{mdframed}
 
-	\footnotesize
-	(gilt immer wenn der offene Kreis stabil ist)
-\end{mdframed}
+	Zur Auswertung des Nyquist-Kriteriums im Bode Diagramm, spaltet man die Ortskurve nach Betrag
+	A = |$F_0 (jw)$ und Phase $\varphi$ = $arg(F_0(jw))$
 
-Zur Auswertung des Nyquist-Kriteriums im Bode Diagramm, spaltet man die Ortskurve nach Betrag
-A = |$F_0 (jw)$ und Phase $\varphi$ = $F_0(jw)$
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Nyquist_Bode_1.png}
+		\includegraphics[width=\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Nyquist_Bode_2.png}
+	\end{figure}
 
-\includegraphics[width=0.94\columnwidth]{Figures/Nyquist_Bode.png}
+	\begin{center}
+		\textbf{Stabilität für: } \(\left. \omega \right|_{A=1} < \left. \omega \right|_{\varphi = -180^\circ}\)
+	\end{center}
 
-Falls die Bedingung nicht funktioniert, wird die allgemeine Formulierung verwendet:
 
-\includegraphics[width=0.94\columnwidth]{Figures/Allgemein_Nyquist.png}
+	\textbf{Falls die vereinfachte Bedingung nicht funktioniert, wird die allgemeine Formulierung verwendet:}
 
-\begin{mdframed}[style=exercise]
-	Der geschlossene Regelkreis ist stabil, wenn der Fahrstrahl von $P_{krit}$ = -1 +j0
-	zu $F_0 (jw)$ für wachsendes $\omega$ von +0 bis +$\infty$ eine Winkeländerung
-	$^{\omega=+\infty}_{\omega=+0} \Delta \phi _{soll} = n_r \cdot$ 180° $+n_a \cdot$ 90°
-	erfährt.\\
-	$n_r$: Anzahl der Pole rechts der imaginären Achse\\
-	$n_a$: Anzahl der Pole auf der imaginären Achse
-\end{mdframed}
+	\begin{mdframed}[style=exercise, frametitle=Allgemeines Nyquist-Kriterium:]
+		\includegraphics[width=0.94\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Allgemein_Nyquist.png}
 
-\subsubsection{Phasenrad/Phasenreserve:}
+		Der geschlossene Regelkreis ist stabil, wenn der Fahrstrahl von $P_{krit}$ = -1 +j0
+		zu $F_0 (jw)$ für wachsendes $\omega$ von +0 bis +$\infty$ eine Winkeländerung
+		\begin{align*}
+			^{\omega=+\infty}_{\omega=+0} \Delta \phi _{soll} = n_r \cdot 180^\circ +n_a \cdot 90^\circ
+		\end{align*}
+		erfährt.\\
+		$n_r$: Anzahl der Pole rechts der imaginären Achse\\
+		$n_a$: Anzahl der Pole auf der imaginären Achse
+	\end{mdframed}
 
-\begin{itemize}[leftmargin=*]
-	\item[] Aus Bodediagramm ablesen: Bei Verstärkung von 1
-	\item[] Winkeln von -180° nach oben rechnen
-	\item befriedigendes Verhalten bei Störungen gilt: $\varphi _R \geq 30\circ$
-	\item gutes Verhalten (überschwingungsarm) gilt: $\varphi _R \approx  60\circ$
-	\item gutes Verhalten (überschwingungsfrei) gilt: $\varphi _R \geq 80^\circ$
-\end{itemize}
+
+\begin{minipage}{\columnwidth}
+	\subsection{Reglerauslegung im Bode Diagramm}
+		Folgende Anforderungen für einen Regler: 
+		\begin{mdframed}[style=exercise]
+			\begin{itemize}[leftmargin=*]
+				\item kleine bleibende Regeldifferenz: \(A(\omega) \gg 1 \text{ bei } \\ \omega \ll \left.\omega\right|_{A=1} \)
+				\item Stabilität: \( \left.\varphi\right|_{A=1} > -180^\circ\)
+				\item Phasenrand: \(\varphi_R = \left.\varphi\right|_{A=1} + 180^\circ\)\\
+					befriedigendes Störverhalten: \(\varphi_R \ge 30^\circ\) \\
+					gutes Führungsverhalten (überschwindungsarm): \(\varphi_R \approx 60^\circ\) \\
+					gutes Führungsverhalten (überschwingungsfrei): \(\varphi_R \ge 80^\circ\) 
+				\item Unterdrückung von Störgrößen: \(A(\omega) \ll 1 \text{ bei } \\ \omega \gg \left.\omega\right|_{A=1} \)
+			\end{itemize}
+		\end{mdframed}
+\end{minipage}
+
+		
 
 \subsection{Einstellregler Ziegler/Nichols}
-\subsubsection{Maßnahmen zur Verbesserung des Regelkreisverhaltens und Erweiterungen der Regelkreisstruktur}
+	\subsubsection{Maßnahmen zur Verbesserung des Regelkreisverhaltens und Erweiterungen der Regelkreisstruktur}
 
-\centering
-\includegraphics[width=0.9\columnwidth]{Figures/ZieglerNich.png}\\
+	\centering
+	\includegraphics[width=0.9\columnwidth]{Figures/ZieglerNich.png}\\
 
-\raggedright
-\begin{mdframed}[style=exercise, frametitle=Störgrößenaufschaltung:]
-	Falls Angriffsort einer Störgröße bekannt,kann man wie im Bild kompensieren.\\
-	Vorteil: einfacher Regler Entwurf, deutlich schnellere Ausregelung.
-\end{mdframed}
+	\raggedright
+	\begin{mdframed}[style=exercise, frametitle=Störgrößenaufschaltung:]
+		Falls Angriffsort einer Störgröße bekannt,kann man wie im Bild kompensieren.\\
+		Vorteil: einfacher Regler Entwurf, deutlich schnellere Ausregelung.
+	\end{mdframed}
 
-\includegraphics[width=0.9\columnwidth]{Figures/Stoergoesenschaltung.png}
-
-
-\begin{mdframed}[style=exercise, frametitle=Vorsteuerung:]
-	Geeignet, falls kein Kompromiss für gutes Stör und Folgeverhalten.\\
-	Regler ist auf gutes Störverhalten ausgelegt. Mit $F_{Rv}$ wird ein schnelles Folgen
-	auf Führungssignale w(t) erreicht.
-\end{mdframed}
-
-\includegraphics[width=0.9\columnwidth]{Figures/Vorsteuerung.png}
+	\includegraphics[width=0.9\columnwidth]{Figures/Stoergoesenschaltung.png}
 
 
-\begin{mdframed}[style=exercise, frametitle=Kaskadenregelung:]
-	Ineinander geschachtelte Regelkreise (innere Regelkreise „schneller“). „Innere“
-	Störungen können bereits innen ausgeregelt werden. Können von Innen nach Außen in Betrieb genommen werden.
-\end{mdframed}
+	\begin{mdframed}[style=exercise, frametitle=Vorsteuerung:]
+		Geeignet, falls kein Kompromiss für gutes Stör und Folgeverhalten.\\
+		Regler ist auf gutes Störverhalten ausgelegt. Mit $F_{Rv}$ wird ein schnelles Folgen
+		auf Führungssignale w(t) erreicht.
+	\end{mdframed}
 
-\includegraphics[width=0.9\columnwidth]{Figures/Kaskadenregelung.png}
+	\includegraphics[width=0.9\columnwidth]{Figures/Vorsteuerung.png}
 
-\newpage
+
+	\begin{mdframed}[style=exercise, frametitle=Kaskadenregelung:]
+		Ineinander geschachtelte Regelkreise (innere Regelkreise „schneller“). „Innere“
+		Störungen können bereits innen ausgeregelt werden. Können von Innen nach Außen in Betrieb genommen werden.
+	\end{mdframed}
+
+	\includegraphics[width=0.9\columnwidth]{Figures/Kaskadenregelung.png}
+
+	\newpage
