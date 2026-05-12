@@ -40,49 +40,22 @@
 		\includegraphics[width=\columnwidth]{Figures/systemtechnik/SFmitDGL.png}
 		Falls \(m < n \), sind alle höheren \(b_\mu = 0\) zu wählen.
 	\end{mdframed}
+
+\subsection{Übertragungsfunktion F(s)}
+	\begin{align*}
+		F(s) = \frac{X_a(s)}{X_e(s)}
+	\end{align*}
+
+\subsubsection{F(s) aus DGL}
 	
-
-\subsection{Ortskurven und Frequenzkennlinien}
-
-Ortskurvendarstellung:
-\begin{center}
-	\includegraphics[width=0.96\columnwidth]{Figures/Ortskurve.png}
-\end{center}
 \begin{mdframed}[style=exercise]
-	Für wachsendes $\omega$ werden die komplexen Werte F(j$\omega$) in die
-	komplexe F-Ebene eingetragen und zur Ortskurve verbunden.\\ Jeder
-	Ortskurvenpunkt kann jetzt als Zeiger gedeutet werden.
+	\begin{align*}
+		& a_{n} \overset{(n)}{x}_{a}+\ldots+a_{1} \dot{x}_{a}+a_{0} x_{a} = b_{m} \overset{(m)}{x}_{e}+\ldots+b_{1} \dot{x}_{e}+b_{0} x_{e}\\
+		& \Rightarrow F(s) = \frac{b_{m} s^{m}+\ldots+b_{2} s^{2}+b_{1} s+b_{0}}{a_{n} s^{n}+\ldots+a_{2} s^{2}+a_{1} s+a_{0}}
+	\end{align*}
 \end{mdframed}
 
-Bodediagramm Darstellung:
-\begin{center}
-	\includegraphics[width=0.96\columnwidth]{Figures/Bodediagramm.png}
-\end{center}
-\begin{mdframed}[style=exercise]
-	Der Amplitudengang A($\omega$) wird in doppelt logarithmischer Darstellung
-	aufgetragen,\\ der Phasengang y($\omega$)) halblogarithmisch. Gemeinsame
-	Abszisse ist $\omega$.
-
-	Bei diesem Beispiel (PT1-Glied) ist deutlich der\\ Tiefpass-Charakter zu
-	erkennen.
-
-	Verkettete Funktionen im Bodediagramm resultieren als Produkt der
-	Einzelübertragungsfunktionen.
-
-	D.h. Verstärkung wird multipliziert und Phasenverschiebung addiert.\\ Das
-	heißt: Sowohl Phasengang (halblogarithmische Darstellung) und Amplitudengang
-	(logarithmische Darstellung) werden graphisch addiert!
-\end{mdframed}
-
-\subsection{$\mathbf{F(s)}$ in Pol- und Nullstellenform}
-\begin{mdframed}[style=exercise]
-	Zähler- und Nennerpolynom von F(s) besitzt Nullstellen. Diese sind von
-	$a_v$ und $b_u$ abhängig.\\
-	Nullstellen des Zählers sind Nullstellen von F(s)\\
-	Nullstellen des Nenners sind Polstellen von F(s)\\
-	Wenn Pole $s_pv$ und Nullstellen $s_nu$ bekannt, kann man F(s) mit dem
-	Faktor Q in faktorisierter Form darstellen.
-\end{mdframed}
+\subsubsection{F(s) in Pol- und Nullstellenform}
 
 \[
 	F(s)=Q \cdot \frac{\prod_{\mu=1}^{m}\left(s-s_{N \mu}\right)}{\prod_{v=1}^{n}\left(s-s_{P V}\right)}
@@ -90,51 +63,43 @@ Bodediagramm Darstellung:
 \]
 
 \begin{mdframed}[style=exercise]
-	Die Stabilität von $F(s)$ kann anhand der Lage der Pole $s_pv$ in der s-Ebene
-	beurteilt werden.\\ $F(s)$ ist stabil, wenn alle Pole $s_pv$ in der linken
-	s-Halbebene liegen.\\ Instabile Pole in der Rechten Halbebene lassen sich
-	nicht durch Reihenschaltung mit entsprechender Nullstelle kompensieren!
-\end{mdframed}
-\begin{mdframed}[style=exercise]
-	Bedeutung Polstelle:
+	Pole in der rechten Halbebene führen zu einem instabilen System. Diese können nicht durch Nullstellen kompensiert werden.
 
 	Pole bewirken ein zeitverzögertes Verhalten. Je weiter links sie sich befinden,
-	desto schneller ist der Einschwingvorgang.
-
+	desto schneller ist der Einschwingvorgang.\\
 	$\Rightarrow$ Wenn Pole deutlich weiter links liegen als andere andere, kann man sie ohne
 	großen Fehler vernachlässigen.
 \end{mdframed}
 \begin{mdframed}[style=exercise]
-	Bedeutung Nullstelle:\\
-	NS bewirken ein differenzierendes Verhalten (Beschleunigung des Systems)
+	Nullstellen bewirken ein differenzierendes Verhalten (Beschleunigung des Systems)
 	Einfluss weit links in der s-Ebene kann häufig vernachlässigt werden.
-
 \end{mdframed}
 
+\newcolumn
 \subsection{Signalflussplan Algebra}
 \begin{itemize}[leftmargin=*]
 	\item Kettenstruktur:
 	      \begin{center}
-		      \includegraphics[width=0.96\columnwidth]{Figures/Kettenstruktur.png}
+		      \includegraphics[width=0.9\columnwidth]{Figures/systemtechnik/Kettenstruktur.png}
 	      \end{center}
 
 	\item Parallelstruktur:
 	      \begin{center}
-		      \includegraphics[width=0.96\columnwidth]{Figures/Parallelstruktur.png}
+		      \includegraphics[width=0.9\columnwidth]{Figures/systemtechnik/Parallelstruktur.png}
 	      \end{center}
 
 	\item Kreisstruktur:
 	      \begin{center}
-		      \includegraphics[width=0.96\columnwidth]{Figures/Kreisstruktur.png}
+		      \includegraphics[width=0.9\columnwidth]{Figures/systemtechnik/Kreisstruktur.png}
 	      \end{center}
 
 	\item Verschieben einer Additionsstelle:
 	      \begin{center}
-		      \includegraphics[width=0.9\columnwidth]{Figures/Verschiebung einer Additionsstelel.png}
+		      \includegraphics[width=0.9\columnwidth]{Figures/systemtechnik/Verschiebung_Additionsstelle.png}
 	      \end{center}
 
 	\item Verschieben einer Verzweigung:
 	      \begin{center}
-		      \includegraphics[width=0.9\columnwidth]{Figures/Verschiebung einer Verzweigung.png}
+		      \includegraphics[width=0.9\columnwidth]{Figures/systemtechnik/Verschiebung_Verzweigung.png}
 	      \end{center}
 \end{itemize}
