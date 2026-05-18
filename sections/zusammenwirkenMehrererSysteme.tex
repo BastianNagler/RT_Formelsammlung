@@ -47,25 +47,43 @@
 		$F_R =K \cdot F_R ' $
 	\end{mdframed}
 
-	\includegraphics[width=0.94\columnwidth]{Figures/zusammenwirkenMehrererSysteme/WOKkreis.png}
-	\[
+	\includegraphics[width=0.94\columnwidth]{Figures/zusammenwirkenMehrererSysteme/WOKkreis.png}\\
+	\(
 		\Rightarrow F_w (s)= \dfrac {F_R \cdot F_S} {1+F_R \cdot F_S \cdot F_r} = \dfrac {F_R \cdot F_S} {1+F_o}
-	\]
+	\)
 
 	\begin{align*}
-		F_o (s) & = F_R (s) \cdot F_S (s) \cdot F_r (s)
-		\\ & =K \cdot F_R '(s) \cdot F_S (s) \cdot F_r (s)
-		\\ & =K \cdot Q \cdot \frac{\prod_{u=1}^{m}\left(s-s_{\text {Nou
-				}}\right)}{\prod_{v=1}^{n}\left(s-s_{\text {pov }}\right)}
+		F_o (s) & = F_R (s) \cdot F_S (s) \cdot F_r (s) \\
+		& =K \cdot F_R '(s) \cdot F_S (s) \cdot F_r (s) \\
+		& =K \cdot Q \cdot \frac{\prod_{\mu=1}^{m}\left(s-s_{N0\mu}\right)}{\prod_{\theta=1}^{n}\left(s-s_{P0\theta}\right)}
 	\end{align*}
 
 	Für eine Polstele, muss der Nenner von $F_w (s)$ Null werden:
-	\[
-		\dfrac{F_R (s) \cdot F_S (s)}{1+F_o (s)} \Rightarrow 1+F_o (s) \stackrel{!}{=}0
-	\]
+	\begin{align*}
+		\dfrac{F_R (s) \cdot F_S (s)}{1+F_o (s)} \Rightarrow 1+F_o (s) \stackrel{!}{=}0 \\
+		\Rightarrow \frac{\prod_{\theta=1}^{n}\left(s-s_{P0\theta}\right)}{\prod_{\mu=1}^{m}\left(s-s_{N0\mu}\right)} = -K \cdot Q
+	\end{align*}
 
-\subsection{Konstruktion der WOK}
-	\begin{mdframed}[style=exercise]
+	Diese Gleichung kann in Betrag und Phase aufgeteilt werden:
+	\begin{align*}
+		& \frac{\prod_{\theta=1}^{n}\left|s-s_{P0\theta}\right|}{\prod_{\mu=1}^{m}\left|s-s_{N0\mu}\right|} = |K \cdot Q| \\
+		& \sum_{\theta=1}^{n} \angle\left(s-s_{P0\theta}\right) - \sum_{\mu=1}^{m} \angle\left(s-s_{N0\mu}\right) = \angle\left(-K \cdot Q\right) = \pm r \cdot 180^\circ \\
+		& \qquad r = 1,3,5,\ldots \text{ für }K \cdot Q > 0 \\
+		& \qquad r = 0,2,4,\ldots \text{ für }K \cdot Q < 0
+	\end{align*}
+
+	Aus der Phasenbeziehung lässt sich der Verlauf der WOK bestimmen.\\
+	{\footnotesize Wenn Betragsbedingung erfüllt \textrightarrow Punkt ist Teil der WOK}
+	\\
+	\\
+	Die Betragsbeziehung gestattet es, jedem Punkt der WOK den entsprechenden \(K\)-Wert zuzuordnen. \\
+	{\footnotesize 
+		entsprechenden \(s\)-Wert einsetzen \\
+		\(K_{Krit}\) durch einsetzen von \(s_{Krit}\) (Punkt an dem WOK durch Imaginär-Achse geht)\\
+		Stabilität für \(K > K_{Krit}\) oder \(K < K_{Krit}\) aus der WOK ablesen.
+	}
+
+	\begin{mdframed}[style=exercise, frametitle=Konstruktion der WOK]
 		\begin{enumerate}[leftmargin=*]
 			\item Alle n Äste der WOK beginnen mit K=0 in den n Polen $s_{Po_v}$ des offenen Regelkreises.
 			\item m Äste der WOK enden für K $\rightarrow \pm \infty$ in den \(m\) endlichen Nullstellen $s_{No_v}$ des offenen Regelkreises 
@@ -78,7 +96,7 @@
 				beginnen und die dabei\\
 				b) mit der reellen Achse die Winkel
 				\begin{align*}
-					\varphi_{k} &= \frac{(2 k-1) \cdot 180^{\circ}}{n-m} \text{ für } KQ < 0 \\
+					\varphi_{k} &= \frac{(2 k-1) \cdot 180^{\circ}}{n-m} \text{ für } KQ > 0 \\
 					\text{bzw. } \varphi_{k} &= \frac{(2 k-2) \cdot 180^{\circ}}{n-m} \text{ für } KQ < 0 \\
 					\text{mit } k &= 1,2,3,\ldots,n-m
 				\end{align*}
@@ -132,7 +150,7 @@
 	\end{mdframed}
 
 	Zur Auswertung des Nyquist-Kriteriums im Bode Diagramm, spaltet man die Ortskurve nach Betrag
-	A = |$F_0 (jw)$ und Phase $\varphi$ = $arg(F_0(jw))$
+	A = $|F_0 (jw)|$ und Phase $\varphi$ = $arg(F_0(jw))$
 
 	\begin{figure}[H]
 		\centering
@@ -179,19 +197,46 @@
 
 		
 
-\subsection{Einstellregler Ziegler/Nichols}
-	\subsubsection{Maßnahmen zur Verbesserung des Regelkreisverhaltens und Erweiterungen der Regelkreisstruktur}
+\subsection{Einstellregeln}
+	\subsubsection{Zeigler/Nichols}
+		Zur Bestimmung der Reglerparameter wird der Regelkreis zunächst mit einem reinen P-Regler betrieben. 
+		Dabei wird die Reglerverstärkung \(K_P\) so lange erhöht, bis der Regelkreis Dauerschwingungen ausführt.
+		Diese kritische Verstärkung \(K_{P,krit}\) und die Periodendauer \(T_{krit}\) der Schwingung werden notiert.
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.9\columnwidth]{Figures/zusammenwirkenMehrererSysteme/ZieglerNich.png}
+		\end{figure}		
+		Ein Nachteil dieses Verfahrens ist, dass das System bis zum Schwingen gebracht werden muss (Stabilitätsgrenze), was nicht bei allen Regelstrecken zulässig ist (Zerstörung).
 
-	\centering
-	\includegraphics[width=0.9\columnwidth]{Figures/ZieglerNich.png}\\
+	\subsubsection{Betragsoptimum}
+		Anwendbar für \(PT_n\)-Systeme mit einer „dominierenden“ (großen) und mehreren kleinen Zeitkonstanten (möglichst reelle Pole):
+		\begin{align*}
+			&T_1 = T_d \gg T_2, T_3, \ldots, T_n \qquad T_\Sigma = \sum T_2, T_3, \ldots, T_n\\
+			&\text{Streckenverstärkung: } K_S = K_1 \cdot K_2 \cdot \ldots \cdot K_n \\
+			&\Rightarrow \text{PI-Regler: } F_{PI} = K_R \cdot \left(1 + \frac{1}{T_N \cdot s}\right)\\
+			&\text{mit } T_N = T_d \quad K_R = \frac{T_d}{2 \cdot K_S \cdot T_\Sigma}
+		\end{align*}
 
+	\subsubsection{Symmetrisches Optimum}
+		Anwendbar für \(IT_n\)-Systeme mit mehreren Zeitkonstanten (reelle Pole):
+		\begin{align*}
+			&T_\Sigma = \sum T_1, T_2, \ldots, T_n \\
+			&\text{Streckenverstärkung: }K_S = K_1 \cdot K_2 \cdot \ldots \cdot K_n \\
+			&\Rightarrow \text{PI-Regler} (\varphi_R \approx 40^\circ): \\
+			&F_{PI} = K_R \cdot \left(1 + \frac{1}{T_N \cdot s}\right) \\
+			&\text{mit } T_N = 4 \cdot T_\Sigma \quad K_R = \frac{1}{2 \cdot K_S \cdot T_\Sigma}
+		\end{align*}
+		
+
+
+\subsection{Maßnahmen zur Verbesserung des Regelverhaltens}
 	\raggedright
 	\begin{mdframed}[style=exercise, frametitle=Störgrößenaufschaltung:]
 		Falls Angriffsort einer Störgröße bekannt,kann man wie im Bild kompensieren.\\
 		Vorteil: einfacher Regler Entwurf, deutlich schnellere Ausregelung.
 	\end{mdframed}
 
-	\includegraphics[width=0.9\columnwidth]{Figures/Stoergoesenschaltung.png}
+	\includegraphics[width=0.9\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Stoergoesenschaltung.png}
 
 
 	\begin{mdframed}[style=exercise, frametitle=Vorsteuerung:]
@@ -200,7 +245,7 @@
 		auf Führungssignale w(t) erreicht.
 	\end{mdframed}
 
-	\includegraphics[width=0.9\columnwidth]{Figures/Vorsteuerung.png}
+	\includegraphics[width=0.9\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Vorsteuerung.png}
 
 
 	\begin{mdframed}[style=exercise, frametitle=Kaskadenregelung:]
@@ -208,6 +253,12 @@
 		Störungen können bereits innen ausgeregelt werden. Können von Innen nach Außen in Betrieb genommen werden.
 	\end{mdframed}
 
-	\includegraphics[width=0.9\columnwidth]{Figures/Kaskadenregelung.png}
+	\includegraphics[width=0.9\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Kaskadenregelung.png}
 
-	\newpage
+	\begin{mdframed}[style=exercise, frametitle=Führungsgrößenfilter:]
+		TODO
+	\end{mdframed}
+
+	\begin{mdframed}[style=exercise, frametitle=Anti-Windup:]
+		TODO
+	\end{mdframed}
