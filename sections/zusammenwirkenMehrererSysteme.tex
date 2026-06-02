@@ -55,19 +55,19 @@
 	\begin{align*}
 		F_o (s) & = F_R (s) \cdot F_S (s) \cdot F_r (s) \\
 		& =K \cdot F_R '(s) \cdot F_S (s) \cdot F_r (s) \\
-		& =K \cdot Q \cdot \frac{\prod_{\mu=1}^{m}\left(s-s_{N0\mu}\right)}{\prod_{\theta=1}^{n}\left(s-s_{P0\theta}\right)}
+		& =K \cdot Q \cdot \frac{\prod_{\mu=1}^{m}\left(s-s_{\color{red}{N0\mu}}\right)}{\prod_{\vartheta=1}^{n}\left(s-s_{\color{red}{P0\vartheta}}\right)}
 	\end{align*}
 
-	Für eine Polstele, muss der Nenner von $F_w (s)$ Null werden:
+	Für eine Polstelle muss der Nenner von $F_w (s)$ Null werden:
 	\begin{align*}
 		\dfrac{F_R (s) \cdot F_S (s)}{1+F_o (s)} \Rightarrow 1+F_o (s) \stackrel{!}{=}0 \\
-		\Rightarrow \frac{\prod_{\theta=1}^{n}\left(s-s_{P0\theta}\right)}{\prod_{\mu=1}^{m}\left(s-s_{N0\mu}\right)} = -K \cdot Q
+		\Rightarrow \frac{\prod_{\vartheta=1}^{n}\left(s-s_{\color{red}{P0\vartheta}}\right)}{\prod_{\mu=1}^{m}\left(s-s_{\color{red}{N0\mu}}\right)} = -K \cdot Q
 	\end{align*}
 
 	Diese Gleichung kann in Betrag und Phase aufgeteilt werden:
 	\begin{align*}
-		& \frac{\prod_{\theta=1}^{n}\left|s-s_{P0\theta}\right|}{\prod_{\mu=1}^{m}\left|s-s_{N0\mu}\right|} = |K \cdot Q| \\
-		& \sum_{\theta=1}^{n} \angle\left(s-s_{P0\theta}\right) - \sum_{\mu=1}^{m} \angle\left(s-s_{N0\mu}\right) = \angle\left(-K \cdot Q\right) = \pm r \cdot 180^\circ \\
+		& \frac{\prod_{\vartheta=1}^{n}\left|s-s_{\color{red}{P0\vartheta}}\right|}{\prod_{\mu=1}^{m}\left|s-s_{\color{red}{N0\mu}}\right|} = |K \cdot Q| \\
+		& \sum_{\vartheta=1}^{n} \angle\left(s-s_{\color{red}{P0\vartheta}}\right) - \sum_{\mu=1}^{m} \angle\left(s-s_{\color{red}{N0\mu}}\right) = \angle\left(-K \cdot Q\right) = \pm r \cdot 180^\circ \\
 		& \qquad r = 1,3,5,\ldots \text{ für }K \cdot Q > 0 \\
 		& \qquad r = 0,2,4,\ldots \text{ für }K \cdot Q < 0
 	\end{align*}
@@ -232,33 +232,32 @@
 \subsection{Maßnahmen zur Verbesserung des Regelverhaltens}
 	\raggedright
 	\begin{mdframed}[style=exercise, frametitle=Störgrößenaufschaltung:]
-		Falls Angriffsort einer Störgröße bekannt,kann man wie im Bild kompensieren.\\
+		Falls Angriffsort einer Störgröße bekannt und Störgröße messbar,kann man wie im Bild kompensieren.\\
 		Vorteil: einfacher Regler Entwurf, deutlich schnellere Ausregelung.
 	\end{mdframed}
-
 	\includegraphics[width=0.9\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Stoergoesenschaltung.png}
-
 
 	\begin{mdframed}[style=exercise, frametitle=Vorsteuerung:]
 		Geeignet, falls kein Kompromiss für gutes Stör und Folgeverhalten.\\
 		Regler ist auf gutes Störverhalten ausgelegt. Mit $F_{Rv}$ wird ein schnelles Folgen
 		auf Führungssignale w(t) erreicht.
 	\end{mdframed}
-
 	\includegraphics[width=0.9\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Vorsteuerung.png}
-
 
 	\begin{mdframed}[style=exercise, frametitle=Kaskadenregelung:]
 		Ineinander geschachtelte Regelkreise (innere Regelkreise „schneller“). „Innere“
 		Störungen können bereits innen ausgeregelt werden. Können von Innen nach Außen in Betrieb genommen werden.
-	\end{mdframed}
 
+		In WOK: \(K\) für innere Kreise muss festgelegt werden. Dann Integration des „fertigen“ inneren Reglers in größere Reglerstruktur. 
+	\end{mdframed}
 	\includegraphics[width=0.9\columnwidth]{Figures/zusammenwirkenMehrererSysteme/Kaskadenregelung.png}
 
 	\begin{mdframed}[style=exercise, frametitle=Führungsgrößenfilter:]
-		TODO
+		Falls eine Nullstelle den Regelkreis dominiert (nächster zur Imaginärachse) kommt es zu einem einzelnen Überschwinger. \\
+		Zur Vermeidung wird in den Zweig der Führungsgröße ein \(PT_1\)-Filter eingefügt, welches die Nullstelle genau kompensiert.
 	\end{mdframed}
 
 	\begin{mdframed}[style=exercise, frametitle=Anti-Windup:]
-		TODO
+		Wenn ein Regler mit I-Anteil und eine Begrenzung der Stellgröße vorliegt, kann es zum „Windup“ kommen: I-Anteil wird immer größer, da die Stellgröße begrenzt ist. Dies führt zu Überschwingen. \\
+		Anti-Windup: Begrenzung des I-Anteils, damit er nicht über die Stellgrößenbegrenzung hinauswächst.
 	\end{mdframed}
