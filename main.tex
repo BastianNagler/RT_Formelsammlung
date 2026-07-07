@@ -84,7 +84,7 @@
 \fancyfoot[c]{\thepage \hspace{1pt} von \pageref{LastPage}}
 % \setlength{\columnsep}{1pt}
 \raggedcolumns
-\begin{multicols*}{2}
+\begin{multicols}{2}
 
 	\input{sections/grundlagen.tex}
 	\input{sections/systemtechnik.tex}
@@ -92,5 +92,8 @@
 	\input{sections/digitaleRegler.tex}
 	\input{sections/systembeschreibungImZustandsraum.tex}
 
-\end{multicols*}
+\end{multicols}
+
+\input{sections/anhang.tex}
+
 \end{document}

@@ -56,8 +56,7 @@
 \includegraphics[width=0.8\columnwidth]{Figures/zustandsraum/Polfestlegung.png}
 
 \raggedright
-Durch die freie Wahl von K können alle n Pole des Systems beliebig platziert
-werden.
+Durch die freie Wahl von K können alle n Pole des Systems beliebig platziert werden.
 
 Von jeder Zwischengröße \(x_i\) eine Rückführung auf jede Eingangsgröße \(u_j\) mit einem Verstärkungsfaktor \(K_{ij}\) möglich.\\
 Die Rückführung führt zu einem neuen System, bei dem die Eingangsgröße \(u_j\) durch die Rückführung von \(x_i\) beeinflusst wird.\\
@@ -68,3 +67,5 @@ Die neue Systemmatrix \(A_{RK}\) muss die gewünschten Pole erhalten.
 	&\operatorname{det}(A_{RK} - sI) \overset{!}{=} 0 \\
 	\Rightarrow &\operatorname{det}(A_{RK} - sI) \overset{!}{=} \text{Nenner von } F(s)_{\text{gew\"unscht}}
 \end{align*}
+
+Alternative Bestimmung von \(A_{RK}\): \(A_{RK} = A - B \cdot K\)
